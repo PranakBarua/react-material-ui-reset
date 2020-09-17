@@ -1,0 +1,16 @@
+.name-highlight{
+    color:orangered;
+    margin-left:100px;
+    border-bottom:1px solid lightgray
+}
+.image{
+    text-align: center;
+    margin-left: 100px;
+}
+.circle{
+    width:200px;
+    height:200px;
+    border-radius:100px;
+    line-height:200px;
+    text-align:center;
+}

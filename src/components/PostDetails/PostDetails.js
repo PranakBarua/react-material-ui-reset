@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Comment from '../Comment/Comment';
-
+import './PostDetails.css'
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -32,7 +32,7 @@ const PostDetails = () => {
     const {postId}=useParams();
     const [post,setPost]=useState({})
     const [comments,setComment]=useState([])
-    const [img,setImg]=useState([]);
+    const [images,setImage]=useState([]);
     useEffect(()=>{
         const url=`https://jsonplaceholder.typicode.com/posts/${postId}`;
         fetch(url)
@@ -47,13 +47,10 @@ const PostDetails = () => {
         const url2='https://randomuser.me/api/';
         fetch(url2)
         .then(res=>res.json())
-        .then(data=>setImg(data))
+        .then(data=>setImage(data))
     },[])
-    //console.log(post);
-    //console.log(comments);
-    //console.log(img.results.email);
-    //const {gender}=img.results;
-    //console.log(gender)
+    const {results}=images
+    console.log(results)
     const {id,userId,title,body}=post;
     return (
         <div>
@@ -76,11 +73,19 @@ const PostDetails = () => {
                 </Card>
             </div>
             <div>
-                <h1 style={{color:'orangered',marginLeft:'100px',borderBottom:'1px solid lightgray'}}>All Comments</h1>
-                {comments.map(cm=> <Comment comment={cm}></Comment>)}
+                <h1 className="name-highlight">All Comments</h1>
+                {comments.map(cm=> <Comment comment={cm} key={cm.id}></Comment>)}
             </div>
             <div>
-               
+                {
+                   results &&
+                   <div>
+                       <h1 className="name-highlight">Image</h1>
+                       <div  className="image">
+                            <img className="circle" src={results[0].picture.large} alt=""/>
+                       </div>
+                   </div>
+                }
             </div>
         </div>
     );
